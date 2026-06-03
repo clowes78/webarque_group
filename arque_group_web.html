@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arque Group | Diseño e Implementación de Proyectos</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors and Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        arque: {
+                            gold: '#c5a059',
+                            dark: '#1c1c1c',
+                            light: '#f7f7f7',
+                            gray: '#8a8a8a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Video Overlay Gradient */
+        .video-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(28,28,28,0.9) 100%);
+        }
+
+        /* Hover image scale */
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.7s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="font-sans bg-arque-light text-arque-dark antialiased">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4 px-6 md:px-12 flex justify-between items-center text-white bg-transparent">
+        <a href="#" class="font-serif text-2xl md:text-3xl font-bold tracking-wider">
+            ARQUE<span class="text-arque-gold">.</span>GROUP
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8 items-center text-sm tracking-widest uppercase font-medium">
+            <a href="#nosotros" class="hover:text-arque-gold transition-colors duration-300">Nosotros</a>
+            <a href="#servicios" class="hover:text-arque-gold transition-colors duration-300">Servicios</a>
+            <a href="#proyectos" class="hover:text-arque-gold transition-colors duration-300">Proyectos</a>
+            <a href="https://www.instagram.com/arque.group/" target="_blank" class="hover:text-arque-gold transition-colors duration-300 text-lg">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-2xl focus:outline-none text-white" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-arque-dark z-40 flex flex-col justify-center items-center space-y-8 transform translate-x-full transition-transform duration-300 md:hidden">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-3xl text-white">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#nosotros" class="text-white text-2xl font-serif hover:text-arque-gold mobile-link">Nosotros</a>
+        <a href="#servicios" class="text-white text-2xl font-serif hover:text-arque-gold mobile-link">Servicios</a>
+        <a href="#proyectos" class="text-white text-2xl font-serif hover:text-arque-gold mobile-link">Proyectos</a>
+        <a href="https://www.instagram.com/arque.group/" target="_blank" class="text-white text-2xl hover:text-arque-gold">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <!-- Background Video (Placeholder architecture video) -->
+        <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-building-design-4154-large.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+        
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 z-10 video-overlay"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-20 text-center px-4 max-w-4xl mx-auto mt-20">
+            <h1 class="text-white font-serif text-4xl md:text-6xl lg:text-7xl mb-6 leading-tight animate-fade-in-up">
+                Transformamos Espacios,<br> <span class="text-arque-gold italic">Creamos Experiencias</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Diseño e implementación de proyectos Comerciales, Residenciales y Empresariales al más alto nivel.
+            </p>
+            
+            <!-- WhatsApp CTA Button -->
+            <!-- Nota: Reemplaza "593999999999" con tu número real de WhatsApp -->
+            <a href="https://wa.me/593999999999?text=Hola%20Arque%20Group,%20vengo%20de%20su%20sitio%20web%20y%20deseo%20más%20información." target="_blank" 
+               class="inline-flex items-center justify-center bg-arque-gold text-white px-8 py-4 uppercase tracking-widest text-sm font-semibold hover:bg-white hover:text-arque-dark transition-all duration-300">
+                <i class="fab fa-whatsapp text-lg mr-2"></i> Iniciar Consulta
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="font-serif text-4xl md:text-5xl mb-6 text-arque-dark">Nuestra Filosofía</h2>
+                <div class="w-16 h-1 bg-arque-gold mb-8"></div>
+                <p class="text-gray-600 leading-relaxed mb-6 font-light text-lg">
+                    En <strong>Arque Group</strong>, creemos que la arquitectura y el diseño van más allá de la simple estética; se trata de mejorar la forma en que las personas interactúan con su entorno.
+                </p>
+                <p class="text-gray-600 leading-relaxed font-light text-lg">
+                    Nos especializamos en el desarrollo integral de proyectos. Desde la conceptualización y el diseño hasta la ejecución e implementación final, asegurando acabados de primera y funcionalidad absoluta en cada metro cuadrado.
+                </p>
+            </div>
+            <div class="relative reveal delay-200">
+                <div class="absolute inset-0 bg-arque-gold transform translate-x-4 translate-y-4 -z-10"></div>
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Diseño de interiores elegante" class="w-full h-auto object-cover shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 px-6 md:px-12 bg-arque-light">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-4xl md:text-5xl mb-4 text-arque-dark">Áreas de Especialidad</h2>
+                <div class="w-16 h-1 bg-arque-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Service 1: Residencial -->
+                <div class="bg-white p-10 shadow-lg hover:-translate-y-2 transition-transform duration-300 group reveal">
+                    <div class="text-4xl text-arque-gold mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4 text-arque-dark">Residencial</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Creamos hogares que inspiran. Diseños personalizados y confortables que reflejan tu estilo de vida, integrando lujo y calidez en cada detalle.
+                    </p>
+                </div>
+
+                <!-- Service 2: Comercial -->
+                <div class="bg-white p-10 shadow-lg hover:-translate-y-2 transition-transform duration-300 group reveal delay-100">
+                    <div class="text-4xl text-arque-gold mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4 text-arque-dark">Comercial</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Espacios que cautivan. Optimizamos la estética y funcionalidad de tu negocio para atraer clientes y generar experiencias de compra memorables.
+                    </p>
+                </div>
+
+                <!-- Service 3: Empresarial -->
+                <div class="bg-white p-10 shadow-lg hover:-translate-y-2 transition-transform duration-300 group reveal delay-200">
+                    <div class="text-4xl text-arque-gold mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4 text-arque-dark">Empresarial</h3>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        Oficinas del futuro. Desarrollamos entornos de trabajo corporativos que impulsan la productividad, la creatividad y el bienestar de tu equipo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlight / Video Insert Section -->
+    <section class="py-24 px-6 bg-arque-dark text-white text-center">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="font-serif text-3xl md:text-4xl mb-6">Tu visión, construida con precisión</h2>
+            <p class="font-light text-gray-400 text-lg mb-10">Nos encargamos de todo el proceso: diseño, tramitación, construcción e interiorismo. Soluciones llave en mano para tu total tranquilidad.</p>
+            <!-- Nota: Reemplaza "593999999999" con tu número real -->
+            <a href="https://wa.me/593999999999?text=Hola,%20me%20gustaría%20agendar%20una%20reunión%20para%20un%20proyecto." target="_blank" 
+               class="border border-arque-gold text-arque-gold px-8 py-3 uppercase tracking-widest text-sm hover:bg-arque-gold hover:text-white transition-colors duration-300 inline-block">
+                Cotiza tu Proyecto
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects / Gallery Preview -->
+    <section id="proyectos" class="py-24 px-0 bg-white">
+        <div class="text-center mb-16 px-6 reveal">
+            <h2 class="font-serif text-4xl md:text-5xl mb-4 text-arque-dark">Proyectos Destacados</h2>
+            <div class="w-16 h-1 bg-arque-gold mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+            <!-- Project 1 -->
+            <div class="img-hover-zoom relative h-80 group cursor-pointer reveal">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Oficinas Corporativas">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100">
+                    <h4 class="font-serif text-2xl mb-2">Sede Corporativa</h4>
+                    <span class="text-sm tracking-widest uppercase text-arque-gold">Empresarial</span>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="img-hover-zoom relative h-80 group cursor-pointer reveal delay-100">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Villa Residencial">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100">
+                    <h4 class="font-serif text-2xl mb-2">Casa Minimalista</h4>
+                    <span class="text-sm tracking-widest uppercase text-arque-gold">Residencial</span>
+                </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="img-hover-zoom relative h-80 group cursor-pointer reveal delay-200">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Boutique Comercial">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100">
+                    <h4 class="font-serif text-2xl mb-2">Boutique de Moda</h4>
+                    <span class="text-sm tracking-widest uppercase text-arque-gold">Comercial</span>
+                </div>
+            </div>
+            <!-- Project 4 -->
+            <div class="img-hover-zoom relative h-80 group cursor-pointer reveal delay-300">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Diseño de Interiores">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100">
+                    <h4 class="font-serif text-2xl mb-2">Penthouse Urbano</h4>
+                    <span class="text-sm tracking-widest uppercase text-arque-gold">Residencial</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="https://www.instagram.com/arque.group/" target="_blank" class="inline-flex items-center text-arque-dark font-medium hover:text-arque-gold transition-colors">
+                Ver más en nuestro Instagram <i class="fab fa-instagram ml-2 text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-arque-dark text-white pt-20 pb-10 px-6 md:px-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div>
+                <a href="#" class="font-serif text-3xl font-bold tracking-wider block mb-6">
+                    ARQUE<span class="text-arque-gold">.</span>
+                </a>
+                <p class="text-gray-400 font-light text-sm max-w-xs leading-relaxed">
+                    Expertos en diseño e implementación de proyectos. Transformando visiones en realidades arquitectónicas.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-serif text-xl mb-6 text-arque-gold">Enlaces Rápidos</h4>
+                <ul class="space-y-3 font-light text-gray-400 text-sm">
+                    <li><a href="#nosotros" class="hover:text-white transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#servicios" class="hover:text-white transition-colors">Nuestros Servicios</a></li>
+                    <li><a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-serif text-xl mb-6 text-arque-gold">Contacto</h4>
+                <ul class="space-y-4 font-light text-gray-400 text-sm">
+                    <li class="flex items-start">
+                        <i class="fab fa-whatsapp mt-1 mr-3 text-arque-gold"></i>
+                        <a href="https://wa.me/593999999999" target="_blank" class="hover:text-white transition-colors">Atención Directa vía WhatsApp</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-instagram mt-1 mr-3 text-arque-gold"></i>
+                        <a href="https://www.instagram.com/arque.group/" target="_blank" class="hover:text-white transition-colors">@arque.group</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-light">
+            <p>&copy; <span id="year"></span> Arque Group. Todos los derechos reservados.</p>
+            <p class="mt-2 md:mt-0">Diseñado con <span class="text-arque-gold">❤</span> para la excelencia.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/593999999999?text=Hola%20Arque%20Group,%20estoy%20interesado%20en%20una%20asesoría%20para%20un%20proyecto." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] transition-all duration-300 z-50 animate-bounce group"
+       title="Contáctanos por WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <!-- Tooltip -->
+        <span class="absolute right-16 bg-white text-gray-800 text-xs font-semibold px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md pointer-events-none">
+            ¡Hablemos!
+        </span>
+    </a>
+
+    <!-- Interactivity Scripts -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-arque-dark', 'shadow-md');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-3');
+            } else {
+                navbar.classList.remove('bg-arque-dark', 'shadow-md');
+                navbar.classList.add('bg-transparent', 'py-4');
+                navbar.classList.remove('py-3');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                mobileMenu.classList.remove('translate-x-full');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        }
+
+        mobileBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Scroll Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Trigger earlier
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        setTimeout(reveal, 100);
+    </script>
+</body>
+</html>
